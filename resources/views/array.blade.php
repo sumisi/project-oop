@@ -7,6 +7,11 @@
     <title>Document</title>
 </head>
 <body>
+    <div class="bg-red-400 flex justify-center gap-15">
+        <a href="{{route('arrya.shuffle')}}">Перемешать массив</a>
+        <a href="{{route('arrya.sort')}}">Сортировать массив </a>
+        <a href="{{route('arrya.filter')}}">Отфильтровать массив </a>
+    </div>
     <div  class = "flex gap-2 justify-center pt-100">
         @foreach ($array as $item)
         <div>
