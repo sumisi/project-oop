@@ -11,7 +11,7 @@ class ReportController extends Controller
     public function index(Request $request)
     {
         $sort = $request->input('sort');
-        if($sort != 'asc'|| $sort != 'desc')
+        if($sort != 'asc' && $sort != 'desc')
         {
             $sort = 'desc';
         }
@@ -22,7 +22,7 @@ class ReportController extends Controller
         ]);
         if($validate)
         {
-            $reports = Report::where('status_id', $status)->orderBy('created_at')->paginate(4);
+            $reports = Report::where('status_id', $status)->orderBy('created_at',$sort)->paginate(4);
         }
         else{
             $reports = Report::orderBy('created_at', $sort)->paginate(4);
