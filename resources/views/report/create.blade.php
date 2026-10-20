@@ -11,7 +11,7 @@
     <form action="{{route('reports.store')}}" method = "POST">
         @csrf
         <input type="text" placeholder="Введите номер авто" required name="number"><br>
-        <input type="textair" placeholder="Описание" required name="des"><br>
+        <input type="text" placeholder="Описание" required name="des"><br>
         <input type="submit" value="Создать">
     </form>
 </body>

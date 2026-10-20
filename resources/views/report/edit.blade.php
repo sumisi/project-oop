@@ -12,7 +12,7 @@
         @csrf
         @method('put')
         <input type="text" placeholder="Введите номер авто" required name="number" value="{{$report->number}}"><br>
-        <input type="text" placeholder="Описание" required name="des" value="{{$report->des}}"><br>
+        <input type="textarea" placeholder="Описание" required name="des" value="{{$report->des}}"><br>
         <input type="submit" value="Обновить">
     </form>
 </body>

@@ -10,11 +10,30 @@
     <h1 class="text-[40px]">Заявки</h1>
     <a href="/reports/create" class="text-[40px] text-red-500">Создать заявку</a>
     <div class="container mx-auto">
-        <div class="grid grid-cols-4 gap-2">
+    <div>
+        <h2>фильтрация по новизне</h2>
+        <span>
+            <a href="{{route('reports.index', ['sort' => 'desc'])}}">Сначала новые</a>
+            <a href="{{route('reports.index', ['sort' => 'asc'])}}">Сначала старные</a>
+        </span>
+    </div>
+    <div>
+        <h2>фильтрация по по статусу</h2>
+        <ul>
+            @foreach ($statuses as $status)
+                <li>
+                    <a href="{{route('reports.index', ['status' => $status->id])}}">{{$status->name}}</a>
+                </li>
+            @endforeach
+        </ul>
+    </div> 
+        <div class="grid grid-cols-4 gap-2 place-items-center">
             @foreach($reports as $report)
-            <div class="bg-amber-300">
+            <div class="bg-amber-300 h-[300px] p-[10px]">
                 {{$report->number}}<br>
                 {{$report->des}}<br>
+                {{$report->created_at}}<br>
+                {{$report->status->name}}<br>
                 <a href="{{route('reports.edit', $report->id)}}">
                     Изменить заявку
                 </a><br>
@@ -25,6 +44,7 @@
                 </form>
             </div>
             @endforeach
+            {{$reports->links(  )}}
         </div>
     </div>
 </body>

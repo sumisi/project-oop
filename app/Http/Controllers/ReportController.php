@@ -4,13 +4,36 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Report;
+use App\Models\Status;
 
 class ReportController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $reports = Report::all();
-        return view('report.index', compact('reports'));
+        $statuses = Status::all();
+        $sort = $request->input('sort');
+        if($sort == 'asc'|| $sort == 'desc')
+        {
+            $reports = Report::orderBy('created_at', $sort)->paginate(4);
+        }
+        else 
+        {
+            $reports = Report::paginate(4);
+        }
+
+        $status = $request->input('status');
+        $validate = $request->validate([
+            'status' => 'exists:statuses,id'
+        ]);
+        if($validate)
+        {
+            $reports = Report::where('status_id', $status)->paginate(4);
+        }
+        else{
+            $reports = Report::paginate(4);
+        }
+
+        return view('report.index', compact('reports', 'statuses'));
     }
 
     public function store(Request $request, Report $report)
